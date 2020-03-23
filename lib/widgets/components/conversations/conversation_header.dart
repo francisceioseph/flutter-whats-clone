@@ -19,7 +19,13 @@ class ConversationSectionHeader extends StatelessWidget {
             margin: EdgeInsets.all(12),
             child: Icon(this.leadingIcon),
           ),
-          Text(this.headerText),
+          Text(
+            this.headerText,
+            style: Theme.of(context)
+                .primaryTextTheme
+                .subhead
+                .copyWith(fontWeight: FontWeight.bold),
+          ),
         ],
       ),
     );

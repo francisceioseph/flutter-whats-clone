@@ -20,13 +20,15 @@ class ConversationGroup extends StatelessWidget {
             leadingIcon: Icons.pin_drop,
           ),
           sliverListItemBuilder: (BuildContext context, int index) {
-            return ConversationItem();
+            return ConversationItem(
+              isPinned: true,
+            );
           },
           sliverListItemCount: 3,
         ),
         SectionSliverList(
           headerBuilder: () => ConversationSectionHeader(
-            headerText: 'Conversations',
+            headerText: 'All Chats',
             leadingIcon: Icons.message,
           ),
           sliverListItemBuilder: (BuildContext context, int index) {
