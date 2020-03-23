@@ -34,6 +34,13 @@ class ConversationItem extends StatelessWidget {
           icon: Icons.check_circle_outline,
         ),
       ],
+      secondaryActions: <Widget>[
+        IconSlideAction(
+          caption: 'Delete',
+          color: Colors.red,
+          icon: Icons.delete_outline,
+        )
+      ],
     );
   }
 }
