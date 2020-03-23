@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:flutter_whats_clone/widgets/pages/messages_page.dart';
 
 class ConversationItem extends StatelessWidget {
   final bool isPinned;
@@ -16,7 +17,12 @@ class ConversationItem extends StatelessWidget {
       actionPane: SlidableDrawerActionPane(),
       child: ListTile(
         leading: CircleAvatar(),
-        title: Text('username'),
+        title: Text(
+          'John Doe',
+          style: theme.primaryTextTheme.subhead.copyWith(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         subtitle: Text('lorem ipsum dolor in si amet...'),
         trailing: Container(
           child: Column(
@@ -26,6 +32,9 @@ class ConversationItem extends StatelessWidget {
             ],
           ),
         ),
+        onTap: () {
+          Navigator.of(context).pushNamed(MessagesPage.routeName);
+        },
       ),
       actions: <Widget>[
         IconSlideAction(
