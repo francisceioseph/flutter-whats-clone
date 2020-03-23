@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_whats_clone/widgets/components/messages/message_list.dart';
 
 class MessagesPage extends StatelessWidget {
   static final String routeName = '/messages';
@@ -9,7 +10,9 @@ class MessagesPage extends StatelessWidget {
       appBar: AppBar(
         title: Text("Messages"),
       ),
-      body: Container(),
+      body: Container(
+        child: MessageList(),
+      ),
     );
   }
 }
