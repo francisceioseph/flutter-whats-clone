@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_whats_clone/widgets/components/conversations/conversation_header.dart';
-import 'package:flutter_whats_clone/widgets/components/conversations/conversation_item.dart';
-import 'package:flutter_whats_clone/widgets/components/section_sliver_list.dart';
+import 'package:flutter_whats_clone/widgets/components/conversations/all_conversations.dart';
+import 'package:flutter_whats_clone/widgets/components/conversations/pinned_conversations.dart';
 
 class ConversationGroup extends StatelessWidget {
   final Map<String, List<dynamic>> conversations;
@@ -12,30 +11,27 @@ class ConversationGroup extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final pinned = conversations['pinned'];
+    final all = conversations['all'];
+
     return CustomScrollView(
       slivers: <Widget>[
-        SectionSliverList(
-          headerBuilder: () => ConversationSectionHeader(
-            headerText: 'Pinned',
-            leadingIcon: Icons.pin_drop,
+        if (pinned.isNotEmpty)
+          PinnedConversations(
+            chats: pinned,
           ),
-          sliverListItemBuilder: (BuildContext context, int index) {
-            return ConversationItem(
-              isPinned: true,
-            );
-          },
-          sliverListItemCount: 3,
-        ),
-        SectionSliverList(
-          headerBuilder: () => ConversationSectionHeader(
-            headerText: 'All Chats',
-            leadingIcon: Icons.message,
+        if (all.isNotEmpty)
+          AllConversations(
+            chats: all,
           ),
-          sliverListItemBuilder: (BuildContext context, int index) {
-            return ConversationItem();
-          },
-          sliverListItemCount: 33,
-        ),
+        if (pinned.isEmpty && all.isEmpty)
+          SliverFillRemaining(
+            child: Center(
+              child: Container(
+                child: Text('No chats found.'),
+              ),
+            ),
+          )
       ],
     );
   }
