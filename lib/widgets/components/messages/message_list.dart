@@ -9,13 +9,13 @@ class MessageList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Timer(
-      Duration(milliseconds: 200),
+      Duration(milliseconds: 300),
       () => _controller.jumpTo(_controller.position.maxScrollExtent),
     );
 
     return ListView.builder(
       controller: _controller,
-      itemCount: 123,
+      itemCount: 30,
       itemBuilder: (BuildContext context, int index) {
         return MessageListItem();
       },

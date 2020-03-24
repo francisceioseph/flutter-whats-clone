@@ -1,13 +1,14 @@
 import 'package:async_redux/async_redux.dart';
+import 'package:flutter_whats_clone/models/chat_group.dart';
 import 'package:flutter_whats_clone/redux/state/app_state.dart';
 
 class ChatsViewModel {
-  final Map<String, List<dynamic>> chats;
+  final ChatGroup chats;
 
   ChatsViewModel({this.chats});
 
   factory ChatsViewModel.build(Store<AppState> store) {
-    Map<String, List<dynamic>> chats = store.state.chatState.chats;
+    ChatGroup chats = store.state.chatState.chatGroup;
 
     return ChatsViewModel(
       chats: chats,

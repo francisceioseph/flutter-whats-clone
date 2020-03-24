@@ -1,0 +1,58 @@
+[
+  {
+    "id": "5e7a2418b4c5328e38d6036c",
+    "user_name": "Mabel Armstrong",
+    "user_picture_url": "http://placehold.it/32x32",
+    "last_messge_resume": "incididunt pariatur ea qui qui nisi labore sunt in occaecat",
+    "pinned": true
+  },
+  {
+    "id": "5e7a2418dfdc68d965ee7d13",
+    "user_name": "Rosella Tyson",
+    "user_picture_url": "http://placehold.it/32x32",
+    "last_messge_resume": "ut veniam elit voluptate laborum sint nulla tempor Lorem dolore",
+    "pinned": false
+  },
+  {
+    "id": "5e7a241831ba8605c1cd4f35",
+    "user_name": "Alvarado Underwood",
+    "user_picture_url": "http://placehold.it/32x32",
+    "last_messge_resume": "eu aliquip nostrud culpa pariatur aliquip dolor reprehenderit ea id",
+    "pinned": false
+  },
+  {
+    "id": "5e7a2418611db333570e6a0e",
+    "user_name": "Gray Johnson",
+    "user_picture_url": "http://placehold.it/32x32",
+    "last_messge_resume": "excepteur id excepteur consectetur eu occaecat aliqua velit magna sit",
+    "pinned": true
+  },
+  {
+    "id": "5e7a24187c799da8044140e5",
+    "user_name": "Lucinda Hammond",
+    "user_picture_url": "http://placehold.it/32x32",
+    "last_messge_resume": "do nostrud ea qui culpa pariatur id adipisicing sit ut",
+    "pinned": false
+  },
+  {
+    "id": "5e7a241859badff911aea539",
+    "user_name": "Stone West",
+    "user_picture_url": "http://placehold.it/32x32",
+    "last_messge_resume": "nulla laborum ea incididunt ullamco labore dolore voluptate ut non",
+    "pinned": true
+  },
+  {
+    "id": "5e7a241887faaab0b3f17635",
+    "user_name": "Camacho Vazquez",
+    "user_picture_url": "http://placehold.it/32x32",
+    "last_messge_resume": "labore ea velit magna veniam aliqua labore aliquip voluptate irure",
+    "pinned": true
+  },
+  {
+    "id": "5e7a2418e447d6c3c94a48d6",
+    "user_name": "Singleton Winters",
+    "user_picture_url": "http://placehold.it/32x32",
+    "last_messge_resume": "cillum ullamco elit minim pariatur ad proident officia nisi veniam",
+    "pinned": true
+  }
+]

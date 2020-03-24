@@ -1,30 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_whats_clone/models/chat_group.dart';
 import 'package:flutter_whats_clone/widgets/components/conversations/all_conversations.dart';
 import 'package:flutter_whats_clone/widgets/components/conversations/pinned_conversations.dart';
 
 class ConversationGroup extends StatelessWidget {
-  final Map<String, List<dynamic>> conversations;
+  final ChatGroup chatGroup;
 
   ConversationGroup({
-    @required this.conversations,
+    @required this.chatGroup,
   });
 
   @override
   Widget build(BuildContext context) {
-    final pinned = conversations['pinned'];
-    final all = conversations['all'];
-
     return CustomScrollView(
       slivers: <Widget>[
-        if (pinned.isNotEmpty)
+        if (chatGroup.pinned.isNotEmpty)
           PinnedConversations(
-            chats: pinned,
+            chats: chatGroup.pinned,
           ),
-        if (all.isNotEmpty)
+        if (chatGroup.all.isNotEmpty)
           AllConversations(
-            chats: all,
+            chats: chatGroup.all,
           ),
-        if (pinned.isEmpty && all.isEmpty)
+        if (chatGroup.pinned.isEmpty && chatGroup.all.isEmpty)
           SliverFillRemaining(
             child: Center(
               child: Container(

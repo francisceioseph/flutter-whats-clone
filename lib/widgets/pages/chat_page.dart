@@ -15,7 +15,7 @@ class ChatPage extends StatelessWidget {
       body: ChatsProvider(
         builder: (BuildContext context, ChatsViewModel vm) {
           return ConversationGroup(
-            conversations: vm.chats,
+            chatGroup: vm.chats,
           );
         },
       ),

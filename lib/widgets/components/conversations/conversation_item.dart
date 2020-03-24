@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:flutter_whats_clone/models/chat.dart';
 import 'package:flutter_whats_clone/widgets/pages/messages_page.dart';
 
 class ConversationItem extends StatelessWidget {
-  final bool isPinned;
+  final Chat chat;
 
-  ConversationItem({
-    this.isPinned = false,
-  });
+  ConversationItem({@required this.chat});
 
   @override
   Widget build(BuildContext context) {
@@ -18,16 +17,19 @@ class ConversationItem extends StatelessWidget {
       child: ListTile(
         leading: CircleAvatar(),
         title: Text(
-          'John Doe',
+          chat.userName,
           style: theme.primaryTextTheme.subhead.copyWith(
             fontWeight: FontWeight.bold,
           ),
         ),
-        subtitle: Text('lorem ipsum dolor in si amet...'),
+        subtitle: Text(
+          chat.lastMessgeResume,
+          overflow: TextOverflow.ellipsis,
+        ),
         trailing: Container(
           child: Column(
             children: <Widget>[
-              if (this.isPinned) Icon(Icons.pin_drop),
+              if (this.chat.pinned) Icon(Icons.pin_drop),
               Text('Jun 8'),
             ],
           ),

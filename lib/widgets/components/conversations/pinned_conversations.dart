@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_whats_clone/models/chat.dart';
 import 'package:flutter_whats_clone/widgets/components/conversations/conversation_header.dart';
 import 'package:flutter_whats_clone/widgets/components/conversations/conversation_item.dart';
 import 'package:flutter_whats_clone/widgets/components/section_sliver_list.dart';
 
 class PinnedConversations extends StatelessWidget {
-  final List<dynamic> chats;
+  final List<Chat> chats;
 
   PinnedConversations({
     this.chats = const [],
@@ -20,7 +21,7 @@ class PinnedConversations extends StatelessWidget {
       ),
       sliverListItemBuilder: (BuildContext context, int index) {
         return ConversationItem(
-          isPinned: true,
+          chat: chats[index],
         );
       },
     );

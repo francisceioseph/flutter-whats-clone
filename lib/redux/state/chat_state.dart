@@ -1,26 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_whats_clone/models/chat_group.dart';
 
 class ChatState {
-  static final defaultState = {
-    'pinned': [],
-    'all': [],
-  };
+  static final ChatGroup defaultState = ChatGroup();
 
-  final Map<String, List<dynamic>> chats;
+  final ChatGroup chatGroup;
 
   ChatState({
-    @required this.chats,
+    @required this.chatGroup,
   });
 
   factory ChatState.initial() => ChatState(
-        chats: defaultState,
+        chatGroup: defaultState,
       );
 
   ChatState copy({
-    Map<String, List<dynamic>> conversations,
+    ChatGroup chatGroup,
   }) {
     return ChatState(
-      chats: conversations ?? this.chats,
+      chatGroup: chatGroup ?? this.chatGroup,
     );
   }
 }
