@@ -16,7 +16,7 @@ class MessageFormMainButton extends StatelessWidget {
         right: 8,
       ),
       decoration: BoxDecoration(
-        color: Colors.black,
+        color: Theme.of(context).primaryColor,
         borderRadius: BorderRadius.all(Radius.circular(32)),
       ),
       child: IconButton(

@@ -15,12 +15,11 @@ class ConversationItem extends StatelessWidget {
     return Slidable(
       actionPane: SlidableDrawerActionPane(),
       child: ListTile(
-        leading: CircleAvatar(),
+        leading: CircleAvatar(
+          backgroundImage: NetworkImage(chat.userPictureUrl),
+        ),
         title: Text(
           chat.userName,
-          style: theme.primaryTextTheme.subhead.copyWith(
-            fontWeight: FontWeight.bold,
-          ),
         ),
         subtitle: Text(
           chat.lastMessgeResume,
@@ -35,7 +34,10 @@ class ConversationItem extends StatelessWidget {
           ),
         ),
         onTap: () {
-          Navigator.of(context).pushNamed(MessagesPage.routeName);
+          Navigator.of(context).pushNamed(
+            MessagesPage.routeName,
+            arguments: chat,
+          );
         },
       ),
       actions: <Widget>[
