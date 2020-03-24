@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_whats_clone/widgets/components/messages/message_form_field.dart';
 import 'package:flutter_whats_clone/widgets/components/messages/message_form_main_button.dart';
+import 'package:flutter_whats_clone/widgets/pages/camera_page.dart';
 
 class MessageForm extends StatefulWidget {
   @override
@@ -62,7 +63,9 @@ class _MessageFormState extends State<MessageForm> {
                     ),
                     IconButton(
                       icon: Icon(Icons.camera_alt),
-                      onPressed: null,
+                      onPressed: () {
+                        Navigator.of(context).pushNamed(CameraPage.routeName);
+                      },
                     ),
                   ],
                 ),
