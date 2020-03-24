@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_whats_clone/widgets/components/messages/message_form.dart';
 import 'package:flutter_whats_clone/widgets/components/messages/message_list.dart';
 
 class MessagesPage extends StatelessWidget {
@@ -11,7 +12,14 @@ class MessagesPage extends StatelessWidget {
         title: Text("Messages"),
       ),
       body: Container(
-        child: MessageList(),
+        child: Column(
+          children: <Widget>[
+            Expanded(
+              child: MessageList(),
+            ),
+            MessageForm(),
+          ],
+        ),
       ),
     );
   }
