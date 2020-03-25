@@ -29,7 +29,7 @@ class _CameraPageBodyState extends State<CameraPageBody> {
 
     _controller = CameraController(
       _camera,
-      ResolutionPreset.medium,
+      ResolutionPreset.ultraHigh,
     );
 
     _cameraInitializer = _controller.initialize();
@@ -47,14 +47,7 @@ class _CameraPageBodyState extends State<CameraPageBody> {
               return Stack(
                 children: <Widget>[
                   Container(
-                    height: MediaQuery.of(context).size.height,
-                    width: MediaQuery.of(context).size.width,
-                  ),
-                  Container(
-                    child: AspectRatio(
-                      aspectRatio: _controller.value.aspectRatio,
-                      child: CameraPreview(_controller),
-                    ),
+                    child: CameraPreview(_controller),
                   ),
                   Positioned(
                     right: 0,
@@ -94,7 +87,7 @@ class _CameraPageBodyState extends State<CameraPageBody> {
         _camera = widget.cameras[_cameraIndex];
         _controller = CameraController(
           _camera,
-          ResolutionPreset.medium,
+          ResolutionPreset.ultraHigh,
         );
 
         _cameraInitializer = _controller.initialize();

@@ -13,10 +13,12 @@ class CameraMiniaturesList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Timer(
-      Duration(milliseconds: 300),
-      () => _controller.jumpTo(_controller.position.maxScrollExtent),
-    );
+    if (imagesPath.length > 0) {
+      Timer(
+        Duration(milliseconds: 300),
+        () => _controller.jumpTo(_controller.position.maxScrollExtent),
+      );
+    }
 
     return Container(
       width: 104,
