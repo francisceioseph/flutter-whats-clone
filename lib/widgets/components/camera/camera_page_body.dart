@@ -1,5 +1,7 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_whats_clone/widgets/components/camera/camera_controls.dart';
+import 'package:flutter_whats_clone/widgets/components/camera/camera_miniatures_list.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -14,8 +16,11 @@ class CameraPageBody extends StatefulWidget {
 
 class _CameraPageBodyState extends State<CameraPageBody> {
   int _cameraIndex = 0;
+  List<String> _previewPaths = [];
+
   CameraDescription _camera;
   CameraController _controller;
+  Future<void> _cameraInitializer;
 
   @override
   void initState() {
@@ -26,6 +31,8 @@ class _CameraPageBodyState extends State<CameraPageBody> {
       _camera,
       ResolutionPreset.medium,
     );
+
+    _cameraInitializer = _controller.initialize();
   }
 
   @override
@@ -34,33 +41,37 @@ class _CameraPageBodyState extends State<CameraPageBody> {
       appBar: AppBar(title: Text('Camera')),
       body: Container(
         child: FutureBuilder(
-          future: _controller.initialize(),
+          future: _cameraInitializer,
           builder: (context, snap) {
             if (snap.connectionState == ConnectionState.done) {
               return Stack(
                 children: <Widget>[
-                  CameraPreview(_controller),
+                  Container(
+                    height: MediaQuery.of(context).size.height,
+                    width: MediaQuery.of(context).size.width,
+                  ),
+                  Container(
+                    child: AspectRatio(
+                      aspectRatio: _controller.value.aspectRatio,
+                      child: CameraPreview(_controller),
+                    ),
+                  ),
                   Positioned(
-                    bottom: 8,
+                    right: 0,
+                    bottom: 128,
+                    top: 0,
+                    child: CameraMiniaturesList(
+                      imagesPath: _previewPaths,
+                    ),
+                  ),
+                  Positioned(
+                    bottom: 0,
                     left: 0,
                     right: 0,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        FlatButton(
-                          child: Icon(Icons.flash_on),
-                          onPressed: null,
-                        ),
-                        FlatButton(
-                          child: Icon(Icons.radio_button_unchecked),
-                          onPressed: null,
-                        ),
-                        FlatButton(
-                          child: Icon(Icons.rotate_left),
-                          onPressed: null,
-                        ),
-                      ],
+                    child: CameraControls(
+                      currentCameraIndex: _cameraIndex,
+                      onCameraButtonPressed: _cameraButtonPressedHandler,
+                      onFlipCameraButtonPressed: _alternateCamera,
                     ),
                   )
                 ],
@@ -71,24 +82,45 @@ class _CameraPageBodyState extends State<CameraPageBody> {
           },
         ),
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   child: Icon(Icons.photo_camera),
-      //   onPressed: () async {
-      //     try {
-      //       await _initializeControllerFuture;
-
-      //       final path = join(
-      //         (await getApplicationDocumentsDirectory()).path,
-      //         '${DateTime.now()}.png',
-      //       );
-
-      //       await _controller.takePicture(path);
-      //     } catch (e) {
-      //       print(e);
-      //     }
-      //   },
-      // ),
     );
+  }
+
+  void _alternateCamera() async {
+    try {
+      await _controller.dispose();
+
+      setState(() {
+        _cameraIndex = _cameraIndex == 0 ? 1 : 0;
+        _camera = widget.cameras[_cameraIndex];
+        _controller = CameraController(
+          _camera,
+          ResolutionPreset.medium,
+        );
+
+        _cameraInitializer = _controller.initialize();
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  void _cameraButtonPressedHandler() async {
+    try {
+      await _cameraInitializer;
+      final tempDir = await getTemporaryDirectory();
+      final imagePath = join(
+        tempDir.path,
+        'IMG_${DateTime.now().toIso8601String()}.png',
+      );
+
+      await _controller.takePicture(imagePath);
+
+      setState(() {
+        _previewPaths.add(imagePath);
+      });
+    } catch (e) {
+      print(e);
+    }
   }
 
   @override
