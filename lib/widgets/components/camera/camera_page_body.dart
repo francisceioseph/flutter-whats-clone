@@ -1,9 +1,11 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_whats_clone/redux/actions/camera_controls_actions.dart';
+import 'package:flutter_whats_clone/redux/store.dart';
+import 'package:flutter_whats_clone/services/file_service.dart';
 import 'package:flutter_whats_clone/widgets/components/camera/camera_controls.dart';
 import 'package:flutter_whats_clone/widgets/components/camera/camera_miniatures_list.dart';
 import 'package:path/path.dart';
-import 'package:path_provider/path_provider.dart';
 
 class CameraPageBody extends StatefulWidget {
   final List<CameraDescription> cameras;
@@ -17,6 +19,7 @@ class CameraPageBody extends StatefulWidget {
 class _CameraPageBodyState extends State<CameraPageBody> {
   int _cameraIndex = 0;
   List<String> _previewPaths = [];
+  FileService fileService = FileService();
 
   CameraDescription _camera;
   CameraController _controller;
@@ -25,6 +28,7 @@ class _CameraPageBodyState extends State<CameraPageBody> {
   @override
   void initState() {
     super.initState();
+
     _camera = widget.cameras[_cameraIndex];
 
     _controller = CameraController(
@@ -33,6 +37,12 @@ class _CameraPageBodyState extends State<CameraPageBody> {
     );
 
     _cameraInitializer = _controller.initialize();
+
+    store.dispatch(DisableFlashButton());
+
+    if (widget.cameras.length < 2) {
+      store.dispatch(DisableFlipButton());
+    }
   }
 
   @override
@@ -62,7 +72,6 @@ class _CameraPageBodyState extends State<CameraPageBody> {
                     left: 0,
                     right: 0,
                     child: CameraControls(
-                      currentCameraIndex: _cameraIndex,
                       onCameraButtonPressed: _cameraButtonPressedHandler,
                       onFlipCameraButtonPressed: _alternateCamera,
                     ),
@@ -79,6 +88,9 @@ class _CameraPageBodyState extends State<CameraPageBody> {
   }
 
   void _alternateCamera() async {
+    store.dispatch(DisableFlipButton());
+    store.dispatch(DisableMainButton());
+
     try {
       await _controller.dispose();
 
@@ -94,13 +106,19 @@ class _CameraPageBodyState extends State<CameraPageBody> {
       });
     } catch (e) {
       print(e);
+    } finally {
+      store.dispatch(ToggleFlipButton());
+      store.dispatch(EnableFlipButton());
+      store.dispatch(EnableMainButton());
     }
   }
 
   void _cameraButtonPressedHandler() async {
+    store.dispatch(DisableMainButton());
+
     try {
       await _cameraInitializer;
-      final tempDir = await getTemporaryDirectory();
+      final tempDir = await fileService.getPictureDirectory();
       final imagePath = join(
         tempDir.path,
         'IMG_${DateTime.now().toIso8601String()}.png',
@@ -113,6 +131,8 @@ class _CameraPageBodyState extends State<CameraPageBody> {
       });
     } catch (e) {
       print(e);
+    } finally {
+      store.dispatch(EnableMainButton());
     }
   }
 

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_whats_clone/redux/state/camera_controls_state.dart';
 import 'package:flutter_whats_clone/widgets/components/camera/camera_button.dart';
+import 'package:flutter_whats_clone/widgets/providers/camera_controls_provider.dart';
 
 class CameraControls extends StatelessWidget {
-  final int currentCameraIndex;
   final void Function() onCameraButtonPressed;
   final void Function() onFlipCameraButtonPressed;
 
   CameraControls({
-    this.currentCameraIndex,
     this.onCameraButtonPressed,
     this.onFlipCameraButtonPressed,
   });
@@ -39,17 +39,33 @@ class CameraControls extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                CameraButton(
-                  icon: Icons.flash_on,
+                CameraControlsProvider(
+                  builder: (BuildContext context, CameraControlsState state) {
+                    return CameraButton(
+                      icon: state.flashButtonIcon,
+                    );
+                  },
                 ),
-                CameraButton(
-                  icon: Icons.radio_button_unchecked,
-                  onPressed: onCameraButtonPressed,
-                  size: 80,
+                CameraControlsProvider(
+                  builder: (BuildContext context, CameraControlsState state) {
+                    return CameraButton(
+                      icon: state.mainButtonIcon,
+                      onPressed: state.isMainButtonEnabled
+                          ? onCameraButtonPressed
+                          : null,
+                      size: 80,
+                    );
+                  },
                 ),
-                CameraButton(
-                  icon: _flipCameraIcon,
-                  onPressed: onFlipCameraButtonPressed,
+                CameraControlsProvider(
+                  builder: (BuildContext context, CameraControlsState state) {
+                    return CameraButton(
+                      icon: state.flipButtonIcon,
+                      onPressed: state.isFlipButtonEnabled
+                          ? onFlipCameraButtonPressed
+                          : null,
+                    );
+                  },
                 ),
               ],
             ),
@@ -58,7 +74,4 @@ class CameraControls extends StatelessWidget {
       ],
     );
   }
-
-  get _flipCameraIcon =>
-      this.currentCameraIndex == 0 ? Icons.camera_front : Icons.camera_rear;
 }

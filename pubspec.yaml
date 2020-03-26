@@ -26,6 +26,8 @@ dependencies:
   flutter_sticky_header: "^0.4.2"
   flutter_slidable: ^0.5.4
   async_redux: ^2.4.4
+  rxdart: ^0.23.1
+  permission_handler:
   camera:
   path_provider:
   path:

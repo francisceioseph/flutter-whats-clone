@@ -20,7 +20,6 @@ class CameraButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final defaultBackgroundColor = theme.buttonColor;
     final defaultForegroundColor = theme.iconTheme.color;
 
     return Container(
@@ -31,7 +30,7 @@ class CameraButton extends StatelessWidget {
           this.icon,
           color: foregroundColor ?? defaultForegroundColor,
         ),
-        fillColor: backgroundColor ?? defaultBackgroundColor,
+        fillColor: _fillColor(theme),
         constraints: BoxConstraints.tightFor(
           width: size,
           height: size,
@@ -41,4 +40,9 @@ class CameraButton extends StatelessWidget {
       ),
     );
   }
+
+  Color _fillColor(ThemeData theme) =>
+      (this.onPressed != null || this.onLongPress != null)
+          ? (backgroundColor ?? theme.buttonColor)
+          : Colors.grey[400];
 }
