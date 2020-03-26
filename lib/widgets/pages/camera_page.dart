@@ -8,8 +8,10 @@ class CameraPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CameraProvider(
-      builder: (context, cameras) {
-        return CameraPageBody(cameras: cameras);
+      builder: (context, state) {
+        return CameraPageBody(
+          cameraState: state,
+        );
       },
     );
   }

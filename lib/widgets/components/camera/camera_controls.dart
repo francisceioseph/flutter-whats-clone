@@ -1,5 +1,6 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_whats_clone/redux/actions/camera_actions.dart';
 import 'package:flutter_whats_clone/redux/actions/camera_controls_actions.dart';
 import 'package:flutter_whats_clone/redux/actions/camera_miniatures_actions.dart';
 import 'package:flutter_whats_clone/redux/state/camera_controls_state.dart';
@@ -85,25 +86,21 @@ class CameraControls extends StatelessWidget {
     try {
       final videoPath = await Singleton.fileService.videPath;
       await controller.startVideoRecording(videoPath);
+      store.dispatch(
+        AddFilePath(filePath: videoPath),
+      );
     } catch (e) {
       print(e);
     }
   }
 
-  void onFlipCameraButtonPressed() {}
-
-  void _disableSecondaryButtons() {
-    store.dispatch(DisableFlipButton());
-    store.dispatch(DisableFlashButton());
-  }
-
-  void _enableSecondaryButtons() {
-    store.dispatch(EnableFlashButton());
-    store.dispatch(EnableFlipButton());
+  void onFlipCameraButtonPressed() {
+    store.dispatch(FlipCamera());
+    store.dispatch(ToggleFlipButton());
   }
 
   void _takePicture() async {
-    _disableSecondaryButtons();
+    store.dispatch(DisableAllButtons());
 
     try {
       final imagePath = await Singleton.fileService.imagePath;
@@ -114,7 +111,7 @@ class CameraControls extends StatelessWidget {
     } catch (e) {
       print(e);
     } finally {
-      _enableSecondaryButtons();
+      store.dispatch(EnableAllButtons());
     }
   }
 

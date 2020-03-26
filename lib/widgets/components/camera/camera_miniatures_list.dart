@@ -12,11 +12,12 @@ class CameraMiniaturesList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      key: ValueKey('a'),
       width: 104,
-      child: CameraMiniaturesProvider(builder: (context, state) {
-        final images = state.images;
+      child: CameraMiniaturesProvider(
+        builder: (context, state) {
+          final images = state.images;
 
-        if (_controller.positions.isNotEmpty) {
           Timer(
             Duration(milliseconds: 200),
             () => _controller.animateTo(
@@ -25,9 +26,8 @@ class CameraMiniaturesList extends StatelessWidget {
               curve: Curves.easeOut,
             ),
           );
-        }
 
-        return ListView.builder(
+          return ListView.builder(
             dragStartBehavior: DragStartBehavior.down,
             controller: _controller,
             itemCount: images.length,
@@ -48,8 +48,10 @@ class CameraMiniaturesList extends StatelessWidget {
                   ),
                 ),
               );
-            });
-      }),
+            },
+          );
+        },
+      ),
     );
   }
 }

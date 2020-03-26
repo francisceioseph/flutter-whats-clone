@@ -1,40 +1,20 @@
-import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:async_redux/async_redux.dart';
+import 'package:flutter_whats_clone/redux/state/app_state.dart';
+import 'package:flutter_whats_clone/redux/state/camera_state.dart';
 
-class CameraProvider extends StatefulWidget {
-  final Widget Function(BuildContext, List<CameraDescription>) builder;
+class CameraProvider extends StatelessWidget {
+  final Widget Function(BuildContext, CameraState) builder;
 
   CameraProvider({
     @required this.builder,
   });
 
   @override
-  _CameraProviderState createState() {
-    WidgetsFlutterBinding.ensureInitialized();
-
-    return _CameraProviderState();
-  }
-}
-
-class _CameraProviderState extends State<CameraProvider> {
-  Future<List<CameraDescription>> _availableCameras = availableCameras();
-
-  @override
   Widget build(BuildContext context) {
-    return Container(
-      child: FutureBuilder(
-        future: _availableCameras,
-        builder: (
-          BuildContext context,
-          AsyncSnapshot<List<CameraDescription>> snap,
-        ) {
-          if (snap.hasData) {
-            return widget.builder(context, snap.data);
-          }
-
-          return Text('Loading...');
-        },
-      ),
+    return StoreConnector<AppState, CameraState>(
+      converter: (store) => store.state.cameraState,
+      builder: this.builder,
     );
   }
 }
