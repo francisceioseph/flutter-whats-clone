@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CameraControlsState {
+  final bool isRecording;
   final bool isMainButtonEnabled;
   final bool isFlipButtonEnabled;
   final bool isFlashButtonEnabled;
@@ -10,6 +11,7 @@ class CameraControlsState {
   final IconData flashButtonIcon;
 
   CameraControlsState({
+    this.isRecording = false,
     this.isMainButtonEnabled = true,
     this.isFlipButtonEnabled = true,
     this.isFlashButtonEnabled = true,
@@ -21,6 +23,7 @@ class CameraControlsState {
   factory CameraControlsState.initial() => CameraControlsState();
 
   CameraControlsState copy({
+    bool isRecording,
     bool isMainButtonEnabled,
     bool isFlipButtonEnabled,
     bool isFlashButtonEnabled,
@@ -29,6 +32,7 @@ class CameraControlsState {
     IconData flashButtonIcon,
   }) {
     return CameraControlsState(
+      isRecording: isRecording ?? this.isRecording,
       isMainButtonEnabled: isMainButtonEnabled ?? this.isMainButtonEnabled,
       isFlipButtonEnabled: isFlipButtonEnabled ?? this.isFlipButtonEnabled,
       isFlashButtonEnabled: isFlashButtonEnabled ?? this.isFlashButtonEnabled,

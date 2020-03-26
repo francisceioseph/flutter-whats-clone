@@ -1,11 +1,11 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_whats_clone/redux/actions/camera_controls_actions.dart';
+import 'package:flutter_whats_clone/redux/actions/camera_miniatures_actions.dart';
 import 'package:flutter_whats_clone/redux/store.dart';
 import 'package:flutter_whats_clone/services/file_service.dart';
 import 'package:flutter_whats_clone/widgets/components/camera/camera_controls.dart';
 import 'package:flutter_whats_clone/widgets/components/camera/camera_miniatures_list.dart';
-import 'package:path/path.dart';
 
 class CameraPageBody extends StatefulWidget {
   final List<CameraDescription> cameras;
@@ -18,8 +18,8 @@ class CameraPageBody extends StatefulWidget {
 
 class _CameraPageBodyState extends State<CameraPageBody> {
   int _cameraIndex = 0;
-  List<String> _previewPaths = [];
   FileService fileService = FileService();
+  bool isRecordingVideo = false;
 
   CameraDescription _camera;
   CameraController _controller;
@@ -63,17 +63,14 @@ class _CameraPageBodyState extends State<CameraPageBody> {
                     right: 0,
                     bottom: 128,
                     top: 0,
-                    child: CameraMiniaturesList(
-                      imagesPath: _previewPaths,
-                    ),
+                    child: CameraMiniaturesList(),
                   ),
                   Positioned(
                     bottom: 0,
                     left: 0,
                     right: 0,
                     child: CameraControls(
-                      onCameraButtonPressed: _cameraButtonPressedHandler,
-                      onFlipCameraButtonPressed: _alternateCamera,
+                      controller: _controller,
                     ),
                   )
                 ],
@@ -113,32 +110,11 @@ class _CameraPageBodyState extends State<CameraPageBody> {
     }
   }
 
-  void _cameraButtonPressedHandler() async {
-    store.dispatch(DisableMainButton());
-
-    try {
-      await _cameraInitializer;
-      final tempDir = await fileService.getPictureDirectory();
-      final imagePath = join(
-        tempDir.path,
-        'IMG_${DateTime.now().toIso8601String()}.png',
-      );
-
-      await _controller.takePicture(imagePath);
-
-      setState(() {
-        _previewPaths.add(imagePath);
-      });
-    } catch (e) {
-      print(e);
-    } finally {
-      store.dispatch(EnableMainButton());
-    }
-  }
-
   @override
   void dispose() {
     super.dispose();
     _controller.dispose();
+
+    store.dispatch(DisposeFilePaths());
   }
 }

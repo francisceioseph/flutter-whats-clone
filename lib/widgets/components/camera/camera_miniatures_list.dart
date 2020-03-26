@@ -1,48 +1,55 @@
 import 'dart:async';
-import 'dart:io';
 
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_whats_clone/widgets/providers/camera_miniatures_provider.dart';
 
 class CameraMiniaturesList extends StatelessWidget {
-  final List<String> imagesPath;
   final _controller = ScrollController();
 
-  CameraMiniaturesList({
-    this.imagesPath,
-  });
+  CameraMiniaturesList();
 
   @override
   Widget build(BuildContext context) {
-    if (imagesPath.length > 0) {
-      Timer(
-        Duration(milliseconds: 300),
-        () => _controller.jumpTo(_controller.position.maxScrollExtent),
-      );
-    }
-
     return Container(
       width: 104,
-      child: ListView.builder(
-          controller: _controller,
-          itemCount: imagesPath.length,
-          itemBuilder: (BuildContext context, int index) {
-            return Container(
-              margin: EdgeInsets.only(
-                top: 16,
-                right: 16,
-                left: 16,
-              ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.all(Radius.circular(64)),
-                child: Image.file(
-                  File(imagesPath[index]),
-                  width: 72,
-                  height: 72,
-                  fit: BoxFit.cover,
+      child: CameraMiniaturesProvider(builder: (context, state) {
+        final images = state.images;
+
+        if (_controller.positions.isNotEmpty) {
+          Timer(
+            Duration(milliseconds: 200),
+            () => _controller.animateTo(
+              _controller.position.maxScrollExtent,
+              duration: Duration(milliseconds: 200),
+              curve: Curves.easeOut,
+            ),
+          );
+        }
+
+        return ListView.builder(
+            dragStartBehavior: DragStartBehavior.down,
+            controller: _controller,
+            itemCount: images.length,
+            itemBuilder: (BuildContext context, int index) {
+              return Container(
+                margin: EdgeInsets.only(
+                  top: 16,
+                  right: 16,
+                  left: 16,
                 ),
-              ),
-            );
-          }),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.all(Radius.circular(64)),
+                  child: Image.file(
+                    images[index],
+                    width: 72,
+                    height: 72,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              );
+            });
+      }),
     );
   }
 }

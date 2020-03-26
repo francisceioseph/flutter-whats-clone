@@ -37,4 +37,24 @@ class FileService {
   Directory _removeDataDirectory(String path) {
     return Directory(path.split("Android")[0]);
   }
+
+  Future<String> get imagePath async {
+    final tempDir = await getPictureDirectory();
+    final imagePath = join(
+      tempDir.path,
+      'IMG_${DateTime.now().toIso8601String()}.png',
+    );
+
+    return imagePath;
+  }
+
+  Future<String> get videPath async {
+    final tempDir = await getPictureDirectory();
+    final imagePath = join(
+      tempDir.path,
+      'VID_${DateTime.now().toIso8601String()}.mp4',
+    );
+
+    return imagePath;
+  }
 }

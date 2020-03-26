@@ -68,3 +68,31 @@ class DisableFlashButton extends ReduxAction<AppState> {
     return store.state.copy(cameraControlsState: newState);
   }
 }
+
+class StartVideoRecording extends ReduxAction<AppState> {
+  AppState reduce() {
+    final state = store.state.cameraControlsState;
+    final newState = state.copy(
+      isRecording: true,
+      isFlashButtonEnabled: false,
+      isFlipButtonEnabled: false,
+      mainButtonIcon: Icons.stop,
+    );
+
+    return store.state.copy(cameraControlsState: newState);
+  }
+}
+
+class StopVideoRecording extends ReduxAction<AppState> {
+  AppState reduce() {
+    final state = store.state.cameraControlsState;
+    final newState = state.copy(
+      isRecording: false,
+      isFlashButtonEnabled: true,
+      isFlipButtonEnabled: true,
+      mainButtonIcon: Icons.radio_button_unchecked,
+    );
+
+    return store.state.copy(cameraControlsState: newState);
+  }
+}
