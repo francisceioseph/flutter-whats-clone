@@ -33,7 +33,7 @@ class AppRouter {
         if (settings.name == ImageDetailPage.routeName) {
           final File image = settings.arguments;
 
-          return ImageDetailPage(imageFile: image);
+          return ImageDetailPage(file: image);
         }
 
         return ChatPage();

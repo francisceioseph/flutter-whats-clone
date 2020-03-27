@@ -16,8 +16,16 @@ class MessageList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Timer(
-      Duration(milliseconds: 300),
-      () => _controller.jumpTo(_controller.position.maxScrollExtent),
+      Duration(milliseconds: 200),
+      () {
+        if (_controller.positions.length > 0) {
+          _controller.animateTo(
+            _controller.position.maxScrollExtent,
+            duration: Duration(milliseconds: 200),
+            curve: Curves.easeOut,
+          );
+        }
+      },
     );
 
     return ListView.builder(

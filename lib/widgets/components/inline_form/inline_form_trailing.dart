@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class MessageFormMainButton extends StatelessWidget {
+class InlineFormTrailing extends StatelessWidget {
   final IconData icon;
   final void Function() onPressed;
 
-  MessageFormMainButton({
+  InlineFormTrailing({
     @required this.icon,
     this.onPressed,
   });
@@ -19,9 +19,11 @@ class MessageFormMainButton extends StatelessWidget {
         color: Theme.of(context).primaryColor,
         borderRadius: BorderRadius.all(Radius.circular(32)),
       ),
-      child: IconButton(
-        icon: Icon(icon),
-        onPressed: onPressed,
+      child: Listener(
+        child: IconButton(
+          icon: Icon(icon),
+          onPressed: onPressed,
+        ),
       ),
     );
   }

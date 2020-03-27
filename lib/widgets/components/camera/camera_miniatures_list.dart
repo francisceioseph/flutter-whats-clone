@@ -21,11 +21,15 @@ class CameraMiniaturesList extends StatelessWidget {
 
           Timer(
             Duration(milliseconds: 200),
-            () => _controller.animateTo(
-              _controller.position.maxScrollExtent,
-              duration: Duration(milliseconds: 200),
-              curve: Curves.easeOut,
-            ),
+            () {
+              if (_controller.positions.length > 0) {
+                _controller.animateTo(
+                  _controller.position.maxScrollExtent,
+                  duration: Duration(milliseconds: 200),
+                  curve: Curves.easeOut,
+                );
+              }
+            },
           );
 
           return ListView.builder(
