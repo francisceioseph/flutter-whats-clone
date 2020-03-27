@@ -24,7 +24,15 @@ class MessageList extends StatelessWidget {
       controller: _controller,
       itemCount: messages.length,
       itemBuilder: (BuildContext context, int index) {
-        return MessageListItem();
+        final previous = index == 0 ? null : messages[index - 1];
+        final current = messages[index];
+        final next = index == messages.length - 1 ? null : messages[index + 1];
+
+        return MessageListItem(
+          previous: previous,
+          current: current,
+          next: next,
+        );
       },
     );
   }
