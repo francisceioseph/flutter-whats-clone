@@ -16,7 +16,7 @@ class InlineFormTrailing extends StatelessWidget {
         right: 8,
       ),
       decoration: BoxDecoration(
-        color: Theme.of(context).primaryColor,
+        color: Colors.teal[700],
         borderRadius: BorderRadius.all(Radius.circular(32)),
       ),
       child: Listener(

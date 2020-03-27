@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_whats_clone/widgets/components/inline_form/inline_form.dart';
 import 'package:flutter_whats_clone/widgets/pages/camera_page.dart';
@@ -22,7 +24,12 @@ class _MessageFormState extends State<MessageForm> {
       onTrailingButtonPressed: _onMainButtonPressed,
       textFieldTrailing: <Widget>[
         IconButton(
-          icon: Icon(Icons.attach_file),
+          icon: Transform.rotate(
+            angle: pi / 2,
+            child: Icon(
+              Icons.attach_file,
+            ),
+          ),
           onPressed: null,
         ),
         IconButton(
