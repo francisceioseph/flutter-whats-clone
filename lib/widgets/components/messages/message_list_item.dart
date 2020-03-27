@@ -16,6 +16,8 @@ class MessageListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return FractionallySizedBox(
       widthFactor: 0.75,
       alignment: bubbleAlignment(current),
@@ -23,14 +25,23 @@ class MessageListItem extends StatelessWidget {
         margin: EdgeInsets.all(4),
         padding: EdgeInsets.all(16),
         decoration: BoxDecoration(
+          color: backgroundColor(theme),
           border: Border.all(
-            color: Theme.of(context).accentColor,
+            color: borderColor(theme),
           ),
           borderRadius: bubbleBorderRadius,
         ),
-        child: Text('lorem ipsum dolor'),
+        child: Text(current.content),
       ),
     );
+  }
+
+  Color borderColor(ThemeData theme) {
+    return isFromMe ? theme.accentColor : theme.backgroundColor;
+  }
+
+  Color backgroundColor(ThemeData theme) {
+    return isFromMe ? Colors.transparent : theme.backgroundColor;
   }
 
   Alignment bubbleAlignment(Message message) =>
@@ -61,19 +72,19 @@ class MessageListItem extends StatelessWidget {
   BorderRadiusGeometry get radiusTopFromMe => BorderRadius.only(
         topLeft: Radius.circular(16),
         topRight: Radius.circular(16),
-        bottomLeft: Radius.circular(4),
+        bottomLeft: Radius.circular(16),
         bottomRight: Radius.circular(4),
       );
 
   BorderRadiusGeometry get radiusMiddleFromMe => BorderRadius.only(
-        topLeft: Radius.circular(4),
+        topLeft: Radius.circular(16),
         topRight: Radius.circular(4),
-        bottomLeft: Radius.circular(4),
+        bottomLeft: Radius.circular(16),
         bottomRight: Radius.circular(4),
       );
 
   BorderRadiusGeometry get radiusBottomFromMe => BorderRadius.only(
-        topLeft: Radius.circular(4),
+        topLeft: Radius.circular(16),
         topRight: Radius.circular(4),
         bottomRight: Radius.circular(16),
         bottomLeft: Radius.circular(16),
@@ -82,19 +93,19 @@ class MessageListItem extends StatelessWidget {
   BorderRadiusGeometry get radiusTopFromOther => BorderRadius.only(
         topRight: Radius.circular(16),
         topLeft: Radius.circular(16),
-        bottomRight: Radius.circular(4),
+        bottomRight: Radius.circular(16),
         bottomLeft: Radius.circular(4),
       );
 
   BorderRadiusGeometry get radiusMiddleFromOther => BorderRadius.only(
         topLeft: Radius.circular(4),
-        topRight: Radius.circular(4),
+        topRight: Radius.circular(16),
         bottomLeft: Radius.circular(4),
-        bottomRight: Radius.circular(4),
+        bottomRight: Radius.circular(16),
       );
 
   BorderRadiusGeometry get radiusBottomFromOther => BorderRadius.only(
-        topRight: Radius.circular(4),
+        topRight: Radius.circular(16),
         bottomRight: Radius.circular(16),
         topLeft: Radius.circular(4),
         bottomLeft: Radius.circular(16),
