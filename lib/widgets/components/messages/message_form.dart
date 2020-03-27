@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_whats_clone/widgets/components/inline_form/inline_form.dart';
+import 'package:flutter_whats_clone/widgets/components/share_media/share_media_grid.dart';
 import 'package:flutter_whats_clone/widgets/pages/camera_page.dart';
 
 class MessageForm extends StatefulWidget {
@@ -30,7 +31,7 @@ class _MessageFormState extends State<MessageForm> {
               Icons.attach_file,
             ),
           ),
-          onPressed: null,
+          onPressed: () => _openShareActionSheet(context),
         ),
         IconButton(
           icon: Icon(Icons.camera_alt),
@@ -56,5 +57,19 @@ class _MessageFormState extends State<MessageForm> {
     });
 
     _controller.clear();
+  }
+
+  void _openShareActionSheet(BuildContext context) {
+    showModalBottomSheet(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(
+          Radius.circular(20),
+        ),
+      ),
+      context: context,
+      builder: (BuildContext ctx) {
+        return ShareMediaGrid();
+      },
+    );
   }
 }
