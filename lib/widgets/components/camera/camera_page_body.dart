@@ -1,6 +1,7 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_whats_clone/redux/actions/camera_actions.dart';
+import 'package:flutter_whats_clone/redux/actions/camera_miniatures_actions.dart';
 import 'package:flutter_whats_clone/redux/state/camera_state.dart';
 import 'package:flutter_whats_clone/redux/store.dart';
 import 'package:flutter_whats_clone/widgets/components/camera/camera_controls.dart';
@@ -63,5 +64,7 @@ class _CameraPageBodyState extends State<CameraPageBody> {
   @override
   void dispose() {
     super.dispose();
+
+    store.dispatch(DisposeFilePaths());
   }
 }
