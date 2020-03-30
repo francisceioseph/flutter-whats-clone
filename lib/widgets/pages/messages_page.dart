@@ -3,7 +3,7 @@ import 'package:flutter_whats_clone/models/chat.dart';
 import 'package:flutter_whats_clone/redux/view_models/message_vm.dart';
 import 'package:flutter_whats_clone/widgets/components/messages/message_form.dart';
 import 'package:flutter_whats_clone/widgets/components/messages/message_list.dart';
-import 'package:flutter_whats_clone/widgets/providers/messages_provider.dart';
+import 'package:flutter_whats_clone/widgets/connectors/messages_connector.dart';
 
 class MessagesPage extends StatelessWidget {
   static final String routeName = '/messages';
@@ -29,7 +29,7 @@ class MessagesPage extends StatelessWidget {
       body: Column(
         children: <Widget>[
           Expanded(
-            child: MessagesProvider(
+            child: MessagesConnector(
               chatId: chat.id,
               builder: (BuildContext context, MessagesViewModel vm) {
                 return Container(

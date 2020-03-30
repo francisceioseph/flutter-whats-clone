@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_whats_clone/widgets/pages/image_detail_page.dart';
-import 'package:flutter_whats_clone/widgets/providers/camera_miniatures_provider.dart';
+import 'package:flutter_whats_clone/widgets/connectors/camera_miniatures_connector.dart';
 
 class CameraMiniaturesList extends StatelessWidget {
   final _controller = ScrollController();
@@ -15,7 +15,7 @@ class CameraMiniaturesList extends StatelessWidget {
     return Container(
       key: ValueKey('a'),
       width: 104,
-      child: CameraMiniaturesProvider(
+      child: CameraMiniaturesConnector(
         builder: (context, state) {
           final images = state.images;
 

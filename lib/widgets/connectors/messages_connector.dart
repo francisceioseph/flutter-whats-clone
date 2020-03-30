@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_whats_clone/redux/state/app_state.dart';
 import 'package:flutter_whats_clone/redux/view_models/message_vm.dart';
 
-class MessagesProvider extends StatelessWidget {
+class MessagesConnector extends StatelessWidget {
   final String chatId;
   final Widget Function(BuildContext, MessagesViewModel) builder;
 
-  MessagesProvider({
+  MessagesConnector({
     @required this.chatId,
     @required this.builder,
   });

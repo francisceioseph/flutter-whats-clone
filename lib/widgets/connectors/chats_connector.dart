@@ -3,10 +3,10 @@ import 'package:async_redux/async_redux.dart';
 import 'package:flutter_whats_clone/redux/state/app_state.dart';
 import 'package:flutter_whats_clone/redux/view_models/chats_vm.dart';
 
-class ChatsProvider extends StatelessWidget {
+class ChatsConnector extends StatelessWidget {
   final Widget Function(BuildContext, ChatsViewModel) builder;
 
-  ChatsProvider({
+  ChatsConnector({
     @required this.builder,
   });
 

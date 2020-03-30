@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_whats_clone/redux/state/app_state.dart';
 import 'package:flutter_whats_clone/redux/state/camera_miniatures_state.dart';
 
-class CameraMiniaturesProvider extends StatelessWidget {
+class CameraMiniaturesConnector extends StatelessWidget {
   final Widget Function(BuildContext, CameraMiniaturesState) builder;
 
-  CameraMiniaturesProvider({
+  CameraMiniaturesConnector({
     @required this.builder,
   });
 

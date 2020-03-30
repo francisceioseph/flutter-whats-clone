@@ -7,7 +7,7 @@ import 'package:flutter_whats_clone/redux/state/camera_controls_state.dart';
 import 'package:flutter_whats_clone/redux/store.dart';
 import 'package:flutter_whats_clone/services/singleton.dart';
 import 'package:flutter_whats_clone/widgets/components/camera/camera_button.dart';
-import 'package:flutter_whats_clone/widgets/providers/camera_controls_provider.dart';
+import 'package:flutter_whats_clone/widgets/connectors/camera_controls_connector.dart';
 
 class CameraControls extends StatelessWidget {
   final CameraController controller;
@@ -39,7 +39,7 @@ class CameraControls extends StatelessWidget {
           color: Theme.of(context).backgroundColor.withOpacity(0.5),
           child: FractionallySizedBox(
             widthFactor: 0.75,
-            child: CameraControlsProvider(
+            child: CameraControlsConnector(
               builder: (BuildContext context, CameraControlsState state) {
                 return Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
