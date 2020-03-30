@@ -9,6 +9,7 @@ class InlineForm extends StatefulWidget {
 
   final IconData trailingIcon;
   final void Function() onTrailingButtonPressed;
+  final void Function(TapDownDetails) onTrailingButtonTapDown;
 
   final TextEditingController controller;
   final void Function(String) onValueChange;
@@ -21,6 +22,7 @@ class InlineForm extends StatefulWidget {
     this.leadingIcon = Icons.add,
     this.onLeadingButtonPressed,
     this.onTrailingButtonPressed,
+    this.onTrailingButtonTapDown,
     this.onValueChange,
     this.textFieldTrailing = const [],
   });
@@ -67,6 +69,7 @@ class _InlineFormState extends State<InlineForm> {
             InlineFormTrailing(
               icon: widget.trailingIcon,
               onPressed: widget.onTrailingButtonPressed,
+              onTapDown: widget.onTrailingButtonTapDown,
             ),
           ],
         ),
