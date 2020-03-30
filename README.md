@@ -1,16 +1,17 @@
-# flutter_whats_clone
+# Whats Clone
 
-A new Flutter project.
+A Dummy WhatsApp Clone based on this design: [WhatsApp Redesign CONCEPT](https://www.behance.net/gallery/72309913/WhatsApp-Redesign-CONCEPT)
 
-## Getting Started
+## Features
 
-This project is a starting point for a Flutter application.
+- List chats by pinned and unpinned ones
+- Take Pictures
+- Record Videos
+- Record Audio
 
-A few resources to get you started if this is your first Flutter project:
+## Screenshots
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<img src="./github/pictures/pic-1.png" alt="Species Details 1" width="auto" height="500">
+<img src="./github/pictures/pic-2.png" alt="Species Details 2" width="auto" height="500">
+<img src="./github/pictures/pic-3.png" alt="Species Details 3" width="auto" height="500">
+<img src="./github/pictures/pic-4.png" alt="Species Details 4" width="auto" height="500">
