@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'dart:math';
 
 import 'package:audio_recorder/audio_recorder.dart';
@@ -7,7 +6,6 @@ import 'package:flutter_whats_clone/services/singleton.dart';
 import 'package:flutter_whats_clone/widgets/components/inline_form/inline_form.dart';
 import 'package:flutter_whats_clone/widgets/components/share_media/share_media_grid.dart';
 import 'package:flutter_whats_clone/widgets/pages/camera_page.dart';
-import 'package:path/path.dart';
 
 class MessageForm extends StatefulWidget {
   @override
@@ -49,14 +47,9 @@ class _MessageFormState extends State<MessageForm> {
   }
 
   void _trailingButtonTapDownHandler(TapDownDetails details) async {
+    final path = await Singleton.fileService.audioPath;
+
     await AudioRecorder.hasPermissions;
-
-    Directory dir = await Singleton.fileService.getPictureDirectory();
-    String path = join(
-      dir.path,
-      'AUD_${DateTime.now().toIso8601String()}.mp4',
-    );
-
     AudioRecorder.start(path: path, audioOutputFormat: AudioOutputFormat.AAC);
   }
 

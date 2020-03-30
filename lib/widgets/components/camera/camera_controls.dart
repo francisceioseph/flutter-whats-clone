@@ -84,7 +84,7 @@ class CameraControls extends StatelessWidget {
     store.dispatch(StartVideoRecording());
 
     try {
-      final videoPath = await Singleton.fileService.videPath;
+      final videoPath = await Singleton.fileService.videoPath;
       await controller.startVideoRecording(videoPath);
       store.dispatch(
         AddFilePath(filePath: videoPath),
