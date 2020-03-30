@@ -26,22 +26,26 @@ class MessagesPage extends StatelessWidget {
           subtitle: Text('online'),
         ),
       ),
-      body: Container(
-        child: Column(
-          children: <Widget>[
-            Expanded(
-              child: MessagesProvider(
-                chatId: chat.id,
-                builder: (BuildContext context, MessagesViewModel vm) {
-                  return MessageList(
+      body: Column(
+        children: <Widget>[
+          Expanded(
+            child: MessagesProvider(
+              chatId: chat.id,
+              builder: (BuildContext context, MessagesViewModel vm) {
+                return Container(
+                  margin: EdgeInsets.only(
+                    right: 16,
+                    left: 16,
+                  ),
+                  child: MessageList(
                     messages: vm.messages,
-                  );
-                },
-              ),
+                  ),
+                );
+              },
             ),
-            MessageForm(),
-          ],
-        ),
+          ),
+          MessageForm(),
+        ],
       ),
     );
   }
